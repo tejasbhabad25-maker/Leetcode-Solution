@@ -5,8 +5,8 @@ public:
         vector<int>ans;
 
         int ct1 = 0, ct2 = 0;
-        int el1=INT_MIN;
-        int el2=INT_MIN; // el1 and el2 must be initialized because they are compared (arr[i] != el2 and arr[i] != el1) before they are guaranteed to be assigned during the algorithm. Initializing them avoids reading uninitialized variables.
+        int el1=INT_MAX;
+        int el2=INT_MAX; // el1 and el2 must be initialized because they are compared (arr[i] != el2 and arr[i] != el1) before they are guaranteed to be assigned during the algorithm. Initializing them avoids reading uninitialized variables.
 
         for (int i = 0; i < n; i++) {
 
