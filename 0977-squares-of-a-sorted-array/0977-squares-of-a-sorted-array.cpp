@@ -6,15 +6,8 @@ public:
 
         int i=0 , j=n-1;
         while(i<=j){
-            if(arr[i]<0 && arr[j]<0){
-                arr[i]=-arr[i];
-                arr[j]=-arr[j];
-            }
-            else if(arr[i]<0){
-                arr[i]=-arr[i];
-            }
             
-            if(arr[i]>arr[j]){
+            if(abs(arr[i])>abs(arr[j])){
                 ans.push_back(arr[i]*arr[i]);
                 i++;
             }
