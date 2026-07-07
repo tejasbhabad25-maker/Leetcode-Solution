@@ -1,24 +1,14 @@
 class Solution {
 public:
     int pivotInteger(int n) {
-        int st=1 , end=n;
 
-        while(st<=end){
-            int mid=st+(end-st)/2;
+        long long ans=(long long) n*(n+1)/2;
+        ans=sqrt(ans);
 
-            long long S_sum=(long long)mid*(mid+1)/2;
-            long long L_sum=(long long)(n-mid+1)*(mid+n)/2;
-
-            if(S_sum==L_sum){
-                return mid;
-            }
-
-            if(S_sum<L_sum){
-                st=mid+1;
-            }
-            else{
-                end=mid-1;
-            }
+        // consider ans=10 then it's sqrt will be 3.16 but will convert to 3
+        // now , 3*3=9 not 10 also we are looking for complete sq. if not then -1
+        if(ans*ans==(long long) n*(n+1)/2){
+            return ans;
         }
         return -1;
     }
