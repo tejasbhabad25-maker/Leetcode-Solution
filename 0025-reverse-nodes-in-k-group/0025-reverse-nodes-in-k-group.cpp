@@ -10,41 +10,72 @@
  */
 class Solution {
 public:
-    ListNode* getKthNode(ListNode* curr, int k) {
-        while (curr && k > 0) {
-            curr = curr->next;
-            k--;
+
+   ListNode* reverse(ListNode* head) {
+       ListNode* prev = NULL;
+       ListNode* curr = head;
+
+        while (curr != NULL) {
+           ListNode* front = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = front;
         }
-        return curr;
+    
+        return prev;
     }
 
-    ListNode* reverseKGroup(ListNode* head, int k) {
-        ListNode* dummy = new ListNode(0);
-        dummy->next = head;
+   ListNode* getKthNode(ListNode* temp,int k){
+        k--;
+        while(temp!=NULL && k>0){
+            temp=temp->next;
+            k--;
+        }
+        return temp;
+    }
 
-        ListNode* groupPrev = dummy;
+    ListNode* reverseKGroup(ListNode* head, int k){
 
-        while (true) {
-            ListNode* kth = getKthNode(groupPrev, k);
-            if (!kth) break;
+        // we will implement the same logic as reverse Nodes in K groups
+        // just imagine here k=2
 
-            ListNode* groupNext = kth->next;
+        if(head==NULL || head->next==NULL){
+            return head;
+        }
+        
+        ListNode* curr=head;
+        ListNode* prev=NULL;
 
-            ListNode* prev = groupNext;
-            ListNode* curr = groupPrev->next;
+        while(curr!=NULL){
 
-            for (int i = 0; i < k; i++) {
-                ListNode* temp = curr->next;
-                curr->next = prev;
-                prev = curr;
-                curr = temp;
+           ListNode* kthNode=getKthNode(curr,k);
+
+            if (kthNode == NULL) {
+                if (prev!=NULL){
+                    prev->next = curr;
+                }
+                break;
             }
 
-            ListNode* temp = groupPrev->next;
-            groupPrev->next = kth;
-            groupPrev = temp;
-        }
+            // as we need to reverse first 2 Nodes then stored the val of 3rd somewhere and point knode->next=NULL and then reverse
+            
+           ListNode* nextNode=kthNode->next;
+            kthNode->next=NULL;
 
-        return dummy->next;
+            // newNode will be theListNode of the reverse list
+           ListNode* newHead=reverse(curr);
+
+            // as we need to reverse the groups so head should be newHead
+            if(curr==head){
+                head=newHead;
+            }
+            else{
+                prev->next=newHead;
+            }
+
+            prev=curr;
+            curr=nextNode;
+        }
+        return head;
     }
 };
