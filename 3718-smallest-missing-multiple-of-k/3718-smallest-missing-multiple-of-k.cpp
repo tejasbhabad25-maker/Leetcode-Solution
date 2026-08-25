@@ -2,14 +2,14 @@ class Solution {
 public:
     int missingMultiple(vector<int>& nums, int k) {
         
-        unordered_map<int,bool>m;
+        unordered_set<int>s;
         for(int v:nums){
-            m[v]=true;
+            s.insert(v);
         }
 
         int i=k;
-        for(auto v:m){
-            if(m.find(i)==m.end()){
+        for(auto v:s){
+            if(s.find(i)==s.end()){
                 return i;
             }
             i=i+k;
