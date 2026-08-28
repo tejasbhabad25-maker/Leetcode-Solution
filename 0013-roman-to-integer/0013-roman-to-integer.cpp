@@ -1,21 +1,32 @@
 class Solution {
 public:
+
+    int value(char c) {
+        switch(c) {
+            case 'I': return 1;
+            case 'V': return 5;
+            case 'X': return 10;
+            case 'L': return 50;
+            case 'C': return 100;
+            case 'D': return 500;
+            case 'M': return 1000;
+        }
+        return 0;
+    }
+
     int romanToInt(string s) {
 
-        unordered_map<char,int>m;
-        m['I']=1; m['V']=5; m['X']=10; m['L']=50; m['C']=100; m['D']=500; m['M']=1000;
+        int ans = 0;
 
-        int n=s.size();
-        int num=m[s[n-1]];
+        for(int i = 0; i < s.size(); i++) {
 
-        for(int i=n-2;i>=0;i--){
-            if(m[s[i]]>=m[s[i+1]]){
-                num+=m[s[i]];
+            if(i + 1 < s.size() && value(s[i]) < value(s[i + 1])){
+                ans -= value(s[i]);
             }
             else{
-                num-=m[s[i]];
+                ans += value(s[i]);
             }
         }
-        return num;
+        return ans;
     }
 };
