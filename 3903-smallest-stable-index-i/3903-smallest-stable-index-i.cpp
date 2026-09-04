@@ -1,38 +1,24 @@
 class Solution {
 public:
+    int firstStableIndex(vector<int>& nums, int k) {
+        int n = nums.size();
+        vector<int> maxx(n), minn(n);
+        maxx[0] = nums[0];
+        minn[n - 1] = nums[n - 1];
 
-    vector<int>MAX(vector<int>arr){
-        vector<int>ans;
-        int max_el=INT_MIN;
-        for(int i=0;i<arr.size();i++){
-            max_el=max(max_el,arr[i]);
-            ans.push_back(max_el);
+        for (int i = 1; i < n; i++) {
+            maxx[i] = max(maxx[i - 1], nums[i]);
         }
-        return ans;
-    }
 
-    vector<int>MIN(vector<int>arr){
-        int n=arr.size();
-        vector<int>ans(n,0);
-        int min_el=INT_MAX;
-        for(int i=n-1;i>=0;i--){
-            min_el=min(min_el,arr[i]);
-            ans[i]=min_el;
+        for (int i = n - 2; i >= 0; i--) {
+            minn[i] = min(minn[i + 1], nums[i]);
         }
-        return ans;
-    }
 
-    int firstStableIndex(vector<int>& arr, int k) {
-        
-        vector<int>prefix=MAX(arr);
-        vector<int>suffix=MIN(arr);
-        int n=arr.size();
-
-        for(int i=0;i<n;i++){
-            if(prefix[i]-suffix[i]<=k){
+        for (int i = 0; i < n; i++) {
+            if (maxx[i] - minn[i] <= k)
                 return i;
-            }
         }
+
         return -1;
     }
 };
