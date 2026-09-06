@@ -1,21 +1,24 @@
 class Solution {
 public:
     int countRotations(string s, int k) {
-        
-        int n=s.size();
-        int ans=0;
-
-        for(int i=0;i<n;i++){
-            int ct=0;
-            for(int j=0;j<n-1;j++){
-                if(s[(i+j)%n]==s[(i+j+1)%n]){
-                    ct++;
-                }
+        int n =s.size();
+        int count=0;
+        for( int i =0 ; i<n;i++){
+            if(s[i]==s[(i+1)%n]){
+                count++;
             }
-            if(ct==k){
-                ans++;
-            }
+            
         }
-        return ans;
+        if(k==count){
+            return n-count;
+        }
+        else if(k==count-1){
+            return count;
+            
+        }
+        else{
+            return 0;
+        }
+        
     }
 };
