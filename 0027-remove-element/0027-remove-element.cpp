@@ -3,13 +3,13 @@ public:
     int removeElement(vector<int>& arr, int val) {
         int n=arr.size();
 
-        int k=0;
+        int j=0;
         for(int i=0;i<n;i++){
             if(arr[i]!=val){
-                arr[k] = arr[i];
-                k++;
+                arr[j] = arr[i];
+                j++;
             }
         }
-        return k;
+        return j;
     }
 };
