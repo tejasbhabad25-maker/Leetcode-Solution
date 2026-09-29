@@ -12,13 +12,12 @@
 class Solution {
 public:
 
-    int ans=0;
 
-    int func(TreeNode* root){
+    int func(TreeNode* root,int& ans){
         if(root==NULL) return 0;
 
-        int x=func(root->left);
-        int y=func(root->right);
+        int x=func(root->left,ans);
+        int y=func(root->right,ans);
 
         ans=max(x+y,ans);
 
@@ -31,7 +30,9 @@ public:
             return 0;
         }
 
-        func(root);
+        int ans=0;
+
+        func(root,ans);
 
         return ans;
     }
