@@ -1,22 +1,19 @@
 class RecentCounter {
 public:
-
-    unordered_map<int,int>m;
+    queue<int> q;
 
     RecentCounter() {
         
     }
     
     int ping(int t) {
-        m[t]++;
+        q.push(t);
 
-        int ans=0;
-        for(int i=(t-3000);i<=t;i++){
-            if(m.find(i)!=m.end()){
-                ans++;
-            }
+        while(q.front() < t - 3000) {
+            q.pop();
         }
-        return ans;
+
+        return q.size();
     }
 };
 
