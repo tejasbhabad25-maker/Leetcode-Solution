@@ -24,6 +24,26 @@ public:
 
         // OPTIMAL APPROACH
 
+        /* a=9 and b=11
+        a -> 1001
+        b -> 1011
+
+        now we want the sum of the bits means
+        1 + 0 -> 1
+        0 + 1 -> 1
+        0 + 0 -> 0
+        1 + 1 -> 1 and carry 1
+
+        and we add that carry in the left bit
+        this is the normal method we do for addition using bit
+
+        now we can see that for x-or will be suitable and for carry &
+        but we need to add carry in the left
+        so we will shift that carry to the left
+        and will do same operation till we get the carry=0
+
+        */
+
         if(b==0){
             return a;
         }
