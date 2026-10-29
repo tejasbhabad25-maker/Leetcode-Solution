@@ -4,11 +4,11 @@ public:
         
         // [2,2,2,2] cost=3
         int n=s.size();
-        vector<int>arr(n,0);
+        // vector<int>arr(n,0);
 
-        for(int i=0;i<n;i++){
-            arr[i]=abs(s[i]-t[i]);
-        }
+        // for(int i=0;i<n;i++){
+        //     arr[i]=abs(s[i]-t[i]);
+        // }
 
         int cost=0;
         int l=0 , r=0;
@@ -16,10 +16,12 @@ public:
 
         while(r<n){
 
-            cost+=arr[r];
+            // cost+=arr[r];
+            cost+=abs(s[r]-t[r]);
 
             while(cost>maxCost){
-                cost-=arr[l];
+                // cost-=arr[l];
+                cost-=abs(s[l]-t[l]);
                 l++;
             }
 
